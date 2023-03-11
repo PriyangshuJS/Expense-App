@@ -17,15 +17,16 @@ class ExpenseApp extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class HomePage extends StatelessWidget {
   final List<Transaction> transaction = [
     Transaction(id: "I1", title: "Food", amount: 500, date: DateTime.now()),
     Transaction(id: "I2", title: "Clothes", amount: 2000, date: DateTime.now()),
-    Transaction(
-        id: "I3", title: "Sobji Bazar", amount: 1300, date: DateTime.now()),
+    Transaction(id: "I3", title: "Sobji", amount: 1300, date: DateTime.now()),
+    Transaction(id: "I3", title: "Sobji", amount: 1300, date: DateTime.now()),
   ];
-
-  HomePage({super.key});
+  String titlein = "";
+  String amountin = "";
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,29 @@ class HomePage extends StatelessWidget {
           children: [
             const Card(
               child: Text("CHART"),
+            ),
+            // ignore: prefer_const_constructors
+            Card(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: "Title"),
+                    onChanged: (val) => titlein = val,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Amount"),
+                    onChanged: (val) => amountin = val,
+                  ),
+                  TextButton(
+                    child: Text("Add Transaction"),
+                    onPressed: () {
+                      print(titlein);
+                      print(amountin);
+                    },
+                  ),
+                ],
+              ),
             ),
             Column(
               //This column holds all the transactions.
