@@ -31,10 +31,12 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.teal,
         elevation: 15,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        // ignore: prefer_const_literals_to_create_immutables
-        children: [const UserTransaction()],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          // ignore: prefer_const_literals_to_create_immutables
+          children: [const UserTransaction()],
+        ),
       ),
     );
   }
