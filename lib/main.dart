@@ -30,6 +30,16 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.teal,
         elevation: 15,
+        // ignore: prefer_const_literals_to_create_immutables
+        actions: [
+          const IconButton(
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            onPressed: null,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -37,6 +47,10 @@ class HomePage extends StatelessWidget {
           // ignore: prefer_const_literals_to_create_immutables
           children: [const UserTransaction()],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        child: Icon(Icons.add),
       ),
     );
   }

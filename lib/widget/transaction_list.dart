@@ -11,47 +11,45 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 500,
-      child: ListView(
-        //This column holds all the transactions.
-        children: usertransaction.map(
-          (tx) {
-            return Card(
-              elevation: 10,
-              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: ListTile(
-                title: Text(
-                  tx.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return Card(
+            elevation: 10,
+            margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            child: ListTile(
+              title: Text(
+                usertransaction[index].title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              trailing: Text(
+                usertransaction[index].id,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
                 ),
-                trailing: Text(
-                  tx.id,
+              ),
+              subtitle: Text(usertransaction[index].date.toString()),
+              leading: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.teal,
+                    width: 2,
+                  ),
+                ),
+                padding: const EdgeInsets.all(10),
+                child: Text(
+                  "\$${usertransaction[index].amount}",
                   style: const TextStyle(
-                    fontSize: 17,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Text(tx.date.toString()),
-                leading: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.teal,
-                      width: 2,
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    "\$${tx.amount}",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                    ),
+                    color: Colors.teal,
                   ),
                 ),
               ),
-            );
-          },
-        ).toList(),
+            ),
+          );
+        },
+        itemCount: usertransaction.length,
       ),
     );
   }

@@ -4,6 +4,14 @@ class NewTransaction extends StatelessWidget {
   final Function addtx;
   final titleController = TextEditingController();
   final amountController = TextEditingController();
+  void onSubmit() {
+    final titlesub = titleController.text;
+    final amountsub = int.parse(amountController.text);
+    if (titlesub.isEmpty || amountsub <= 0) {
+      return;
+    }
+    addtx(titlesub, amountsub);
+  }
 
   NewTransaction(this.addtx, {super.key});
 
@@ -13,19 +21,20 @@ class NewTransaction extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          TextField(
+          TextFormField(
             decoration: const InputDecoration(labelText: "Title"),
             controller: titleController,
+            onChanged: (_) => onSubmit,
           ),
-          TextField(
+          TextFormField(
             decoration: const InputDecoration(labelText: "Amount"),
             controller: amountController,
+            keyboardType: TextInputType.number,
+            onChanged: (_) => onSubmit,
           ),
           TextButton(
+            onPressed: onSubmit,
             child: const Text("Add Transaction"),
-            onPressed: () {
-              addtx(titleController.text, int.parse(amountController.text));
-            },
           ),
         ],
       ),
