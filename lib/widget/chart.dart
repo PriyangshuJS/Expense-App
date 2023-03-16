@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 
-class MyChart extends StatefulWidget {
-  const MyChart({super.key});
+import '../model/transaction.dart';
 
-  @override
-  State<MyChart> createState() => _MyChartState();
-}
+class MyChart extends StatelessWidget {
+  final List<Transaction> recentTransaction;
 
-class _MyChartState extends State<MyChart> {
+  const MyChart(this.recentTransaction, {super.key});
+
+  List<Map<String, Object>> get groupTransactionValues {
+    return List.generate(7, (index) {
+      return {"day": "day1", "amount": "amount1"};
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Card(
-      child: Text("CHART"),
-    );
+    return Card(
+        elevation: 20,
+        margin: const EdgeInsets.all(20),
+        child: Row(
+          children: const [],
+        ));
   }
 }

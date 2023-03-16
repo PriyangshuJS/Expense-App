@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'widget/user_transaction.dart';
+import 'model/transaction.dart';
+import 'package:expense_app/widget/chart.dart';
+import 'package:expense_app/widget/new_tansaction.dart';
+import 'package:expense_app/widget/transaction_list.dart';
 
 void main() => runApp(const ExpenseApp());
 
@@ -12,15 +15,48 @@ class ExpenseApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Expense App",
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
       home: HomePage(),
     );
   }
 }
 
 // ignore: use_key_in_widget_constructors
-class HomePage extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Transaction> _usertransaction = [
+    // Transaction(id: "I1", title: "Food", amount: 500, date: DateTime.now()),
+    // Transaction(id: "I2", title: "Clothes", amount: 2000, date: DateTime.now()),
+    // Transaction(id: "I3", title: "Sobji", amount: 1300, date: DateTime.now()),
+  ];
+
+  void _addTransaction(String txitle, int txamount) {
+    final newtx = Transaction(
+      id: ((_usertransaction.length) + 1).toString(),
+      title: txitle,
+      amount: txamount,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _usertransaction.add(newtx);
+    });
+  }
+
+  void _startnewtransaction(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return NewTransaction(_addTransaction);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +64,16 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Expense App"),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+
         elevation: 15,
         // ignore: prefer_const_literals_to_create_immutables
         actions: [
-          const IconButton(
-            icon: Icon(
+          IconButton(
+            icon: const Icon(
               Icons.add,
               color: Colors.white,
             ),
-            onPressed: null,
+            onPressed: () => _startnewtransaction(context),
           ),
         ],
       ),
@@ -45,12 +81,16 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           // ignore: prefer_const_literals_to_create_immutables
-          children: [const UserTransaction()],
+          children: [
+            const MyChart(),
+            TransactionList(_usertransaction),
+          ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        child: Icon(Icons.add),
+        onPressed: () => _startnewtransaction(context),
+        child: const Icon(Icons.add),
       ),
     );
   }
