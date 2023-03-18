@@ -36,6 +36,16 @@ class _HomePageState extends State<HomePage> {
     // Transaction(id: "I3", title: "Sobji", amount: 1300, date: DateTime.now()),
   ];
 
+  List<Transaction> get _recentTransaction {
+    return _usertransaction.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addTransaction(String txitle, int txamount) {
     final newtx = Transaction(
       id: ((_usertransaction.length) + 1).toString(),
@@ -82,7 +92,10 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            const MyChart(),
+            MyChart(_recentTransaction),
+            const SizedBox(
+              height: 10,
+            ),
             TransactionList(_usertransaction),
           ],
         ),

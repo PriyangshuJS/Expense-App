@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import '../model/transaction.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -18,7 +20,7 @@ class TransactionList extends StatelessWidget {
                   height: 70,
                 ),
                 const Text(
-                  "No Transaction Listed !! ",
+                  "No Expenditure Listed !! ",
                   style: TextStyle(fontSize: 25),
                 ),
                 const SizedBox(
@@ -42,7 +44,8 @@ class TransactionList extends StatelessWidget {
                   child: ListTile(
                     title: Text(
                       usertransaction[index].title,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     trailing: Text(
                       usertransaction[index].id,
@@ -51,7 +54,10 @@ class TransactionList extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    subtitle: Text(usertransaction[index].date.toString()),
+                    subtitle: Text(
+                      DateFormat.yMMMMd().format(usertransaction[index].date),
+                      style: const TextStyle(fontSize: 13),
+                    ),
                     leading: Container(
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -61,7 +67,8 @@ class TransactionList extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.all(10),
                       child: Text(
-                        "\$${usertransaction[index].amount}",
+                        // ignore: unnecessary_string_escapes
+                        "\₹ ${usertransaction[index].amount}",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

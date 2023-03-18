@@ -29,6 +29,9 @@ class _NewTransactionState extends State<NewTransaction> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
+          const SizedBox(
+            height: 15,
+          ),
           TextFormField(
             decoration: const InputDecoration(labelText: "Title"),
             controller: titleController,
@@ -40,9 +43,15 @@ class _NewTransactionState extends State<NewTransaction> {
             keyboardType: TextInputType.number,
             onChanged: (_) => onSubmit,
           ),
+          const SizedBox(
+            height: 10,
+          ),
           TextButton(
             onPressed: onSubmit,
-            child: const Text("Add Transaction"),
+            child: const Text(
+              "Add Transaction",
+              style: TextStyle(fontSize: 18),
+            ),
           ),
         ],
       ),
