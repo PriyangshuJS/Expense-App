@@ -6,9 +6,10 @@ import '../model/transaction.dart';
 // ignore: use_key_in_widget_constructors
 class TransactionList extends StatelessWidget {
   final List<Transaction> usertransaction;
+  final Function txdelete;
 
   // ignore: prefer_const_constructors_in_immutables, use_key_in_widget_constructors
-  TransactionList(this.usertransaction);
+  TransactionList(this.usertransaction, this.txdelete);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -47,30 +48,25 @@ class TransactionList extends StatelessWidget {
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 20),
                     ),
-                    trailing: Text(
-                      usertransaction[index].id,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: const Color.fromARGB(255, 255, 124, 124),
+                      onPressed: () => txdelete(usertransaction[index].id),
                     ),
                     subtitle: Text(
                       DateFormat.yMMMMd().format(usertransaction[index].date),
                       style: const TextStyle(fontSize: 13),
                     ),
                     leading: Container(
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Theme.of(context).primaryColorDark,
-                          width: 2,
-                        ),
+                            width: 3, color: Theme.of(context).primaryColor),
                       ),
-                      padding: const EdgeInsets.all(10),
                       child: Text(
-                        // ignore: unnecessary_string_escapes
-                        "\₹ ${usertransaction[index].amount}",
+                        "₹${usertransaction[index].amount}",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).primaryColorDark,
                         ),

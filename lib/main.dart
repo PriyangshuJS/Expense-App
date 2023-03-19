@@ -15,9 +15,7 @@ class ExpenseApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Expense App",
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
+      theme: ThemeData(primarySwatch: Colors.teal),
       home: HomePage(),
     );
   }
@@ -46,12 +44,12 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  void _addTransaction(String txitle, int txamount) {
+  void _addTransaction(String txitle, int txamount, DateTime txdate) {
     final newtx = Transaction(
       id: ((_usertransaction.length) + 1).toString(),
       title: txitle,
       amount: txamount,
-      date: DateTime.now(),
+      date: txdate,
     );
 
     setState(() {
@@ -66,6 +64,12 @@ class _HomePageState extends State<HomePage> {
         return NewTransaction(_addTransaction);
       },
     );
+  }
+
+  void _deletetransaction(String id) {
+    setState(() {
+      _usertransaction.removeWhere((tx) => tx.id == id);
+    });
   }
 
   @override
@@ -96,7 +100,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 10,
             ),
-            TransactionList(_usertransaction),
+            TransactionList(_usertransaction, _deletetransaction),
           ],
         ),
       ),

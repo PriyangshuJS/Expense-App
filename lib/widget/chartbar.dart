@@ -26,7 +26,7 @@ class ChartBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(width: 2),
                   color: const Color.fromARGB(255, 226, 255, 252),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(5),
                   boxShadow: const [
                     BoxShadow(
                       color: Colors.grey,
@@ -43,7 +43,7 @@ class ChartBar extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(width: 2),
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
               ),
